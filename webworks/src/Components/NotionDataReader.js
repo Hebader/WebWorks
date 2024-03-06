@@ -66,19 +66,14 @@ const NotionDataReader = () => {
               return (
                 <tr key={index}>
                   <td>
-                    {page.properties.Projectname.title[0]?.plain_text ??
-                      'Projectname'}
+                    {page.properties.Projectname?.title?.[0]?.plain_text ?? 'Projectname'}
                   </td>
                   <td>
-                    {page.properties.Status.rich_text
-                      .map((text) => text.plain_text)
-                      .join(', ') ?? 'Status'}
+                    {page.properties.Status?.select?.name ?? 'Status'}
                   </td>
-                  <td>{formatDate(page.properties.Date.date.start)}</td>
-                  <td>{formatDate(page.properties.Date.date.end)}</td>
                   <td>{page.properties.Hours?.number ?? 'Hours'}</td>
-                  <td>{page.properties.Hours_Left?.number ?? 'Hours left'}</td>
-                  <td>{page.properties.Timespan?.formula ?? 'Timespan'}</td>
+                  <td>{page.properties['Hours left']?.formula?.number ?? 'Hours left'}</td>
+                  <td>{page.properties['Workedhours']?.rollup?.number ?? 'Worked hours'}</td>
                 </tr>
               );
             })}
