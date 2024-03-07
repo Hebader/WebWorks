@@ -19,6 +19,11 @@ import { Link } from 'react-router-dom';
                 </li>
              
                 <li>
+                    <Link to='/projects' className='nav-link'>
+                        Projects
+                    </Link>
+                </li>
+                <li>
                     <Link to='/login' className='nav-link'>
                         Login
                     </Link>

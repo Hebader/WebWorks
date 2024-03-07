@@ -3,6 +3,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Pages/Home";
 import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
+import Projects from "./Pages/Projects";
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function App () {
@@ -17,6 +18,7 @@ export default function App () {
           <Route path="/Home" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/Contact" element={<Contact/>}/>
+          <Route path="/Projects" element={<Projects/>}/>
         </Routes>
       </main>
     </div>

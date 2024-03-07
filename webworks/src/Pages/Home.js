@@ -1,6 +1,6 @@
-import NotionDataReader from '../Components/NotionDataReader';
-
-const test = () => {
-  return <NotionDataReader />;
-};
-export default test;
+const Home = () => {
+  return(
+    <p>Hem</p>
+  )
+}
+export default Home;
