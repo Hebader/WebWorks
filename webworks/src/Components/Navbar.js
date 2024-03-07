@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
         </header>
             <ul className='nav-links'>
                 <li>
-                    <Link to='/home' className='nav-link'>
+                    <Link to='/' className='nav-link'>
                         Home
                     </Link>
                 </li>

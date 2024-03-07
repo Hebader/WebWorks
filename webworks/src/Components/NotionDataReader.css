@@ -1,0 +1,33 @@
+table {
+    margin: 20px 0;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid rgb(53, 53, 53);
+    padding: 10px;
+}
+
+th {
+    height: 50px;
+    color: #242329;
+}
+
+td {
+    text-align: center;
+    color: rgb(44, 44, 44);
+}
+
+td:first-child {
+    color: #242329;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(29, 28, 28);
+    background-color: rgba(62, 62, 62, 0.6);
+}
+.mb-4{
+    display: flex;
+    justify-content: center;
+}
