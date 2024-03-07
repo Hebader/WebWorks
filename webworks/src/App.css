@@ -2,7 +2,7 @@
 .contact-container{
   display: flex;
   justify-content: center;
-  
+  height: 90vh; /*la till detta*/
 }
 .contact-text{
   display: flex;
