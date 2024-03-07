@@ -45,10 +45,10 @@ const NotionDataReader = () => {
             <tr>
               <th>Projectname</th>
               <th>Status</th>
-              <th>Hours</th>
+              {/* <th>Hours</th>
               <th>Worked hours</th>
               <th>Hours left</th>
-              <th>Timespan</th>
+              <th>Timespan</th> */}
             </tr>
           </thead>
           <tbody>
@@ -66,14 +66,14 @@ const NotionDataReader = () => {
               return (
                 <tr key={index}>
                   <td>
-                    {page.properties.Projectname?.title?.[0]?.plain_text ?? 'Projectname'}
+                    {page.properties.Name?.title?.[0]?.plain_text ?? 'Projectname'}
                   </td>
                   <td>
-                    {page.properties.Status?.select?.name ?? 'Status'}
+                    {page.properties.status?.select?.name ?? 'Status'}
                   </td>
-                  <td>{page.properties.Hours?.number ?? 'Hours'}</td>
+                  {/* <td>{page.properties.Hours?.number ?? 'Hours'}</td>
                   <td>{page.properties['Hours left']?.formula?.number ?? 'Hours left'}</td>
-                  <td>{page.properties['Workedhours']?.rollup?.number ?? 'Worked hours'}</td>
+                  <td>{page.properties['Workedhours']?.rollup?.number ?? 'Worked hours'}</td> */}
                 </tr>
               );
             })}
