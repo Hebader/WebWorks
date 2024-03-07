@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
 import Projects from "./Pages/Projects";
+import Footer from "./Components/Footer";
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function App () {
@@ -21,6 +22,9 @@ export default function App () {
           <Route path="/Projects" element={<Projects/>}/>
         </Routes>
       </main>
+      <footer className="site-footer">
+          <Footer />
+        </footer>
     </div>
     </Router>
   );

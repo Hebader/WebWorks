@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
   return (
     <div className='navbar'>
         <div className='menu-container'>
+        <header>
+          <h1>Webworks</h1>
+        </header>
             <ul className='nav-links'>
                 <li>
                     <Link to='/home' className='nav-link'>
