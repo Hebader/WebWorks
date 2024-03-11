@@ -12,7 +12,7 @@ const NotionEmployeeReader = () => {
     };
 
     axios
-      .post('http://localhost:3001/api/notion', payload)
+      .post('http://localhost:3001/api/notion/databas2', payload)
       .then((response) => {
         setData(response.data);
         setLoading(false);

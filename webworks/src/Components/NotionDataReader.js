@@ -13,7 +13,7 @@ const NotionDataReader = () => {
 
     // Använd axios för att göra ett POST-anrop till din API-tjänst med payload.
     axios
-      .post('http://localhost:3001/api/notion', payload)
+      .post('http://localhost:3001/api/notion/databas1', payload)
       .then((response) => {
         // När anropet lyckas, uppdatera 'data'-state med svaret från API:t.
         setData(response.data);
