@@ -73,8 +73,9 @@ const NotionDataReader = () => {
                     {page.properties.Status?.select?.name ?? 'Status'}
                   </td>
                   <td>{page.properties.Hours?.number ?? 'Hours'}</td>
-                  <td>{page.properties['Hours left']?.formula?.number ?? 'Hours left'}</td>
-                  <td>{page.properties['Workedhours']?.rollup?.number ?? 'Worked hours'}</td>
+                  <td>{page.properties['Worked hours']?.rollup?.number ?? 'Worked hours'}</td>
+                  <td>{page.properties.Hoursleft?.formula?.number ?? 'Hours left'}</td>
+                  
                 </tr>
               );
             })}
