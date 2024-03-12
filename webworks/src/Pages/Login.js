@@ -1,5 +1,7 @@
 import React, {useState} from "react";
+import axios from "axios";
 import "./Login.css";
+
 
 const Login = () => {
   const [name, setName] = useState('');
@@ -9,20 +11,29 @@ const Login = () => {
 
   const handleLogin = async(e) =>{ 
     e.preventDefault();
-    const response = await fetch('http://localhost:3001/login', {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json', 
-      },
-      body: JSON.stringify({name, password}),
-    });
-    const data = await response.json();
-    if (response.ok) {
-      alert('Login lyckades')
+    try{
+      // const response = await fetch('http://localhost:3001/login', {
+      //   method: 'POST', 
+      //   headers: {
+      //     'Content-Type': 'application/json', 
+      //   },
+      //   body: JSON.stringify({name, password}),
+      // });
+      const response = await axios.post('http://localhost:3001/login', {name, password});
+      alert (response.data.message);
     }
-    else{
+    catch (error){
+
       alert('Login misslyckades')
     }
+    
+    // const data = await response.json();
+    // if (response.ok) {
+    //   alert('Login lyckades')
+    // }
+    // else{
+    //   alert('Login misslyckades')
+    // }
   };
     return(
       <div>
