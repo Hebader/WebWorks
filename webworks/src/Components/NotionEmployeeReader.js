@@ -45,6 +45,7 @@ const NotionEmployeeReader = () => {
             <tr>
               <th>Name</th>
               <th>Total hours</th>
+              <th>Password</th>
             </tr>
           </thead>
           <tbody>
@@ -54,6 +55,9 @@ const NotionEmployeeReader = () => {
                   {page.properties.Name?.title?.[0]?.plain_text ?? 'Name'}
                 </td>
                 <td>{page.properties['Total hours']?.rollup?.number ?? 'Total hours'}
+                </td>
+                <td>
+                  {page.properties.Password?.rich_text?.[0]?.plain_text ?? 'Password'}
                 </td>
               </tr>
             ))}
