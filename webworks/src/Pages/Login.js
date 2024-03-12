@@ -9,22 +9,18 @@ const Login = () => {
   const [loginStatus, setloginStatus] = useState('');
 
 
-  const handleLogin = async(e) =>{ 
+  const handleLogin = async (e) => {
     e.preventDefault();
-    try{
-      // const response = await fetch('http://localhost:3001/login', {
-      //   method: 'POST', 
-      //   headers: {
-      //     'Content-Type': 'application/json', 
-      //   },
-      //   body: JSON.stringify({name, password}),
-      // });
-      const response = await axios.post('http://localhost:3001/login', {name, password});
-      alert (response.data.message);
-    }
-    catch (error){
-
-      alert('Login misslyckades')
+    try {
+      const response = await axios.post('http://localhost:3001/login', { name, password });
+      setloginStatus(response.data.message); // Update login status based on server response
+      if (response.status === 200) {
+        alert('Login lyckades'); // Show alert for successful login
+      } else {
+        alert('Login misslyckades');
+      }
+    } catch (error) {
+      alert('Login misslyckades');
     }
     
     // const data = await response.json();
