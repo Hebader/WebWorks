@@ -2,7 +2,8 @@
 .contact-container{
   display: flex;
   justify-content: center;
-  height: 90vh; /*la till detta*/
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 .contact-text{
   display: flex;
@@ -13,16 +14,17 @@
 .form-container{
   display:flex;
   flex-direction: column;
-  width: 20%;
-  padding: 0 1em;
+  width: 40vh;
+  padding: 0 2em;
   border-radius: 20px;
-  background-color: rgba(203, 211, 210, 0.733);
+  background-color: #242329de;
   justify-content: center;
   align-items: center;
 }
 
 .form-container label {
   margin: 0.5em 0;
+  color: white;
 }
 
 input[type=submit], [type=reset]{
@@ -52,4 +54,5 @@ input[type=text]::placeholder, input[type=email]::placeholder, input[type=number
 .contact-container p{
   font-size: 12px;
   margin-top: 1em;
+  color:white;
 }
