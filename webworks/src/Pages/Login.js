@@ -39,57 +39,57 @@ const Login = () => {
     setLoginStatus(''); // Clear login status
   };
 
-  return (
-    <div className="login-container">
-      <div className="login-form">
+
+    return (
+      <div className="login-container">
         {isLoggedIn ? (
-          <div>
-            <p>Du är inloggad</p>
+          <div className="logged-in-content">
             <button onClick={handleLogout}>Logga ut</button>
           </div>
         ) : (
-          <form onSubmit={handleLogin}>
-            <div>
-              <label htmlFor="name">Användarnamn:</label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Lösenord:</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button type="submit">Logga in</button>
-          </form>
+          <div className="login-form">
+            <form onSubmit={handleLogin}>
+              <div>
+                <label htmlFor="name">Användarnamn:</label>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="password">Lösenord:</label>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <button type="submit">Logga in</button>
+            </form>
+            {loginStatus && <p>{loginStatus}</p>}
+          </div>
         )}
-        {loginStatus && <p>{loginStatus}</p>}
+        <div className="login-status">
+          {isLoggedIn ? (
+            <span>
+              <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green' }} />{' '}
+              Inloggad
+            </span>
+          ) : (
+            <span>
+              <FontAwesomeIcon
+                icon={faExclamationCircle}
+                style={{ color: 'red' }}
+              />{' '}
+              Utloggad
+            </span>
+          )}
+        </div>
       </div>
-      <div className="login-status">
-        {isLoggedIn ? (
-          <span>
-            <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green' }} />{' '}
-            Inloggad
-          </span>
-        ) : (
-          <span>
-            <FontAwesomeIcon
-              icon={faExclamationCircle}
-              style={{ color: 'red' }}
-            />{' '}
-            Utloggad
-          </span>
-        )}
-      </div>
-    </div>
-  );
+    );;
 };
 
 export default Login;
