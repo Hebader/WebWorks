@@ -6,13 +6,14 @@ import {
   faCheckCircle,
   faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
+import { SlLogin } from 'react-icons/sl';
 
 const Login = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showLogoutButton, setShowLogoutButton] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false); // State to manage the visibility of the login form
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ const Login = () => {
       setLoginStatus(response.data.message); // Update login status based on server response
       if (response.status === 200) {
         setIsLoggedIn(true); // Set isLoggedIn to true if login successful
+        setShowLoginForm(false); // Hide login form after successful login
         alert('Login lyckades'); // Show alert for successful login
       } else {
         setIsLoggedIn(false); // Set isLoggedIn to false if login failed
@@ -38,15 +40,16 @@ const Login = () => {
   const handleLogout = () => {
     setIsLoggedIn(false); // Set isLoggedIn to false when logging out
     setLoginStatus(''); // Clear login status
-    setShowLogoutButton(false); // Hide logout button
+    setShowLoginForm(false); // Hide login form
   };
 
   const handleIconClick = () => {
     if (isLoggedIn) {
-      setShowLogoutButton(true); // Show logout button when icon is clicked
+      // If logged in, show logout button
+      setShowLoginForm(false); // Hide login form
     } else {
-      // If logged out, show login form
-      // You can add additional logic here if needed
+      // If logged out, show login form as a popup
+      setShowLoginForm(true); // Show login form
     }
   };
 
@@ -54,47 +57,48 @@ const Login = () => {
     <div className="login-container">
       {isLoggedIn ? (
         <div className="logged-in-content">
-          {showLogoutButton && <button onClick={handleLogout}>Logga ut</button>}
+          <button onClick={handleLogout}>Logga ut</button>
         </div>
       ) : (
-        <div className="login-form">
-          <form onSubmit={handleLogin}>
-            <div>
-              <label htmlFor="name">Användarnamn:</label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Lösenord:</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button type="submit">Logga in</button>
-          </form>
-          {loginStatus && <p>{loginStatus}</p>}
-        </div>
+        // Conditionally render login form based on showLoginForm state
+        showLoginForm && (
+          <div className="login-popup">
+            <form onSubmit={handleLogin}>
+              <div className="userlogin">
+                <label htmlFor="name">Användarnamn:</label>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="userlogin">
+                <label htmlFor="password">Lösenord:</label>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <button type="submit">Logga in</button>
+            </form>
+            {loginStatus && <p>{loginStatus}</p>}
+          </div>
+        )
       )}
+      {/* Render icon */}
       <div className="login-status" onClick={handleIconClick}>
         {isLoggedIn ? (
-          <span>
+          <span className="span">
             <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green' }} />{' '}
             Inloggad
           </span>
         ) : (
-          <span>
-            <FontAwesomeIcon
-              icon={faExclamationCircle}
-              style={{ color: 'red' }}
-            />{' '}
-            Utloggad
+          <span className="span">
+            <SlLogin />
+            Login
           </span>
         )}
       </div>
