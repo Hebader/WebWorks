@@ -31,31 +31,32 @@ const Login = () => {
     //   alert('Login misslyckades')
     // }
   };
-    return(
-      <div>
-<form onSubmit={handleLogin}>
-  <div>
-    <label htmlFor="name">Användarnamn:</label>
-    <input
-      id="name"
-      type="text"
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-    />
-  </div>
-  <div>
-    <label htmlFor="password">Lösenord:</label>
-    <input
-      id="password"
-      type="password"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-    />
-  </div>
-  <button type="submit">Logga in</button>
-</form>
-{loginStatus && <p>{loginStatus}</p>}
-</div>
-    )
-  }
-  export default Login;
+  return (
+    <div className="login-form">
+      <form onSubmit={handleLogin}>
+        <div>
+          <label htmlFor="name">Användarnamn:</label>
+          <input
+            id="name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Lösenord:</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit">Logga in</button>
+      </form>
+      {loginStatus && <p>{loginStatus}</p>}
+    </div>
+  );
+};
+
+export default Login;
