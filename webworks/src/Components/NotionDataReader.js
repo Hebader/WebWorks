@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./NotionDataReader.css";
+import './NotionDataReader.css';
 
 const NotionDataReader = () => {
   const [data, setData] = useState(null);
@@ -49,33 +49,55 @@ const NotionDataReader = () => {
               <th>Hours</th>
               <th>Worked hours</th>
               <th>Hours left</th>
-              {/* <th>Timespan</th> */}
+              {<th>Timespan</th>}
             </tr>
           </thead>
           <tbody>
             {data.results.map((page, index) => {
               const formatDate = (dateString) => {
-                const date = new Date(dateString);
-                // Exempel: 'sv-SE' för Svenska
-                return new Intl.DateTimeFormat('sv-SE', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                }).format(date);
+                try {
+                  if (!dateString) return 'Invalid date';
+
+                  const date = new Date(dateString);
+
+                  if (isNaN(date.getTime())) {
+                    return 'Invalid date';
+                  }
+
+                  return new Intl.DateTimeFormat('sv-SE', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  }).format(date);
+                } catch (error) {
+                  console.error('Error parsing date:', error);
+                  return 'Invalid date';
+                }
               };
+
               // Rendera en rad i tabellen för varje objekt i 'data.results'.
               return (
                 <tr key={index}>
                   <td>
-                    {page.properties.Name?.title?.[0]?.plain_text ?? 'Projectname'}
+                    {page.properties.Name?.title?.[0]?.plain_text ??
+                      'Projectname'}
+                  </td>
+                  <td>{page.properties.Status?.select?.name ?? 'Status'}</td>
+                  <td>{page.properties.Hours?.number ?? 'Hours'}</td>
+                  <td>
+                    {page.properties['Worked hours']?.rollup?.number ??
+                      'Worked hours'}
                   </td>
                   <td>
-                    {page.properties.Status?.select?.name ?? 'Status'}
+                    {page.properties.Hoursleft?.formula?.number ?? 'Hours left'}
                   </td>
-                  <td>{page.properties.Hours?.number ?? 'Hours'}</td>
-                  <td>{page.properties['Worked hours']?.rollup?.number ?? 'Worked hours'}</td>
-                  <td>{page.properties.Hoursleft?.formula?.number ?? 'Hours left'}</td>
-                  
+                  <td>
+                    {page.properties.Timespan?.date
+                      ? formatDate(page.properties.Timespan.date.start) +
+                        ' - ' +
+                        formatDate(page.properties.Timespan.date.end)
+                      : 'Timespan'}
+                  </td>
                 </tr>
               );
             })}
