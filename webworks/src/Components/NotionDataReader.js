@@ -94,7 +94,7 @@ const NotionDataReader = () => {
                   <td>
                     {page.properties.Timespan?.date
                       ? formatDate(page.properties.Timespan.date.start) +
-                        ' - ' +
+                        ' → ' +
                         formatDate(page.properties.Timespan.date.end)
                       : 'Timespan'}
                   </td>
