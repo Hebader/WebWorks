@@ -43,7 +43,7 @@ const NotionTimereportsReader = () => {
               <th>Note</th>
               <th>Related Projects</th>
             </tr>
-          </thead>return (
+          </thead>
   <tbody>
     {timereports.map((timereport) => (
       <tr key={timereport.id}>
