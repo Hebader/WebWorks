@@ -33,6 +33,11 @@ const Navbar = () => {
               Employees
             </Link>
           </li>
+          <li>
+            <Link to="/timereports" className="nav-link">
+              Timereports
+            </Link>
+          </li>
         </ul>
         <Login isLoggedIn={isLoggedIn} />
       </div>
