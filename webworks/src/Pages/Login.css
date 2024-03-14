@@ -66,3 +66,7 @@
   .login-status .span:hover {
     text-decoration: underline whitesmoke;
   }
+
+  .logout-popup button{
+    font-size: 15px;
+  }

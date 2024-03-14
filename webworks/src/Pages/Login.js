@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCheckCircle,
-  faExclamationCircle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { SlLogin } from 'react-icons/sl';
 
 const Login = () => {
@@ -13,7 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false); // State to manage the visibility of the login form
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false); // State to manage the visibility of the logout button popup
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,78 +20,75 @@ const Login = () => {
         name,
         password,
       });
-      setLoginStatus(response.data.message); // Update login status based on server response
+      setLoginStatus(response.data.message);
       if (response.status === 200) {
-        setIsLoggedIn(true); // Set isLoggedIn to true if login successful
-        setShowLoginForm(false); // Hide login form after successful login
-        alert('Login lyckades'); // Show alert for successful login
+        setIsLoggedIn(true);
+        setShowLoginForm(false);
+        alert('login successful');
       } else {
-        setIsLoggedIn(false); // Set isLoggedIn to false if login failed
-        alert('Login misslyckades');
+        setIsLoggedIn(false);
+        alert('Login failed');
       }
     } catch (error) {
-      setIsLoggedIn(false); // Set isLoggedIn to false if login failed
-      alert('Login misslyckades');
+      setIsLoggedIn(false);
+      alert('Login failed');
     }
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Set isLoggedIn to false when logging out
-    setLoginStatus(''); // Clear login status
-    setShowLoginForm(false); // Hide login form
+    setIsLoggedIn(false);
+    setLoginStatus('');
+    setShowLogoutPopup(false);
   };
 
   const handleIconClick = () => {
     if (isLoggedIn) {
-      // If logged in, show logout button
-      setShowLoginForm(false); // Hide login form
+      setShowLogoutPopup(!showLogoutPopup);
     } else {
-      // If logged out, show login form as a popup
-      setShowLoginForm(true); // Show login form
+      setShowLoginForm(true);
     }
   };
 
   return (
     <div className="login-container">
-      {isLoggedIn ? (
-        <div className="logged-in-content">
-          <button onClick={handleLogout}>Logga ut</button>
-        </div>
-      ) : (
-        // Conditionally render login form based on showLoginForm state
-        showLoginForm && (
-          <div className="login-popup">
-            <form onSubmit={handleLogin}>
-              <div className="userlogin">
-                <label htmlFor="name">Användarnamn:</label>
-                <input
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div className="userlogin">
-                <label htmlFor="password">Lösenord:</label>
-                <input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <button type="submit">Logga in</button>
-            </form>
-            {loginStatus && <p>{loginStatus}</p>}
-          </div>
-        )
-      )}
+      {isLoggedIn
+        ? showLogoutPopup && (
+            <div className="logout-popup">
+              <button onClick={handleLogout}>Log out</button>
+            </div>
+          )
+        : showLoginForm && (
+            <div className="login-popup">
+              <form onSubmit={handleLogin}>
+                <div className="userlogin">
+                  <label htmlFor="name">Username:</label>
+                  <input
+                    id="name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div className="userlogin">
+                  <label htmlFor="password">Password:</label>
+                  <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <button type="submit">Login</button>
+              </form>
+              {loginStatus && <p>{loginStatus}</p>}
+            </div>
+          )}
       {/* Render icon */}
       <div className="login-status" onClick={handleIconClick}>
         {isLoggedIn ? (
           <span className="span">
             <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green' }} />{' '}
-            Inloggad
+            Logged in
           </span>
         ) : (
           <span className="span">
