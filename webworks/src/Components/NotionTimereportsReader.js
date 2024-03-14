@@ -1,43 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./NotionDataReader.css";
-import timereports from '../Pages/Timereports'; // Förutsätter att timereports är en array av tidsrapporter
 
 const NotionTimereportsReader = () => {
-  const [data, setData] = useState(null);
+  const [timereports, setTimereports] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Definiera en funktion för att hämta data från Notion via din API-tjänst.
-  const fetchDataFromNotion = () => {
-    const payload = {
-      // Lägg till payload-data enligt API:ets förväntningar.
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const timereportsResponse = await axios.post('http://localhost:3001/api/notion/databas3');
+        const employeesResponse = await axios.post('http://localhost:3001/api/notion/databas2');
+        const projectsResponse = await axios.post('http://localhost:3001/api/notion/databas1');
+
+        setTimereports(timereportsResponse.data.results);
+        setEmployees(employeesResponse.data.results);
+        setProjects(projectsResponse.data.results);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
-    // Använd axios för att göra ett POST-anrop till din API-tjänst med payload.
-    axios
-      .post('http://localhost:3001/api/notion/databas3', payload)
-      .then((response) => {
-        // När anropet lyckas, uppdatera 'data'-state med svaret från API:t.
-        setData(response.data);
-        console.log('Data hämtad från Notion:', response.data);
-      })
-      .catch((error) => {
-        // Logga ett felmeddelande om anropet misslyckas.
-        console.error('Fel vid hämtning från Notion:', error);
-      });
-  };
-
-  // Använd useEffect-hook för att hämta data när komponenten monteras.
-  // Den tomma beroendearrayen [] gör att detta endast körs en gång.
-  useEffect(() => {
-    fetchDataFromNotion();
+    fetchData();
   }, []);
-
-  // Rendera ett meddelande medan data laddas eller om ingen data finns att visa.
-  if (!data || !Array.isArray(data?.results)) {
-    return <p>Laddar data eller ingen data att visa...</p>;
+  
+  if (loading) {
+    return <p>Loading data...</p>;
   }
 
-  // Rendera en tabell med data från Notion om datan finns.
   return (
     <div>
       <h1 className="mb-4">Timereports</h1>
@@ -50,45 +42,44 @@ const NotionTimereportsReader = () => {
               <th>Hours</th>
               <th>Note</th>
               <th>Related Projects</th>
-              {/* <th>Timespan</th> */}
             </tr>
-          </thead>
-          <tbody>
-            {data.results.map((page, index) => {
-              const formatDate = (dateString) => {
-                const date = new Date(dateString);
-                // Exempel: 'sv-SE' för Svenska
-                return new Intl.DateTimeFormat('sv-SE', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                }).format(date);
-              };
-              // Rendera en rad i tabellen för varje objekt i 'data.results'.
-              return (
-                <tr key={index}>
-                  <td>{formatDate(page.properties.Date?.date?.start)}</td>
-                  <td>
-                    {page.properties['Related to Employees (Timereport 1)']?.relation?.map(employee => (
-                      <span key={employee.id}>{employee.name}</span>
-                    ))}
-                  </td>
-                  <td>{page.properties.Hours?.number ?? 'Hours'}</td>
-                  <td>{page.properties.Note?.title?.[0]?.plain_text ?? 'Note'}</td>
-                  <td>
-                    {page.properties['Related to Project (Timereport 1)']?.relation?.map(project => (
-                      <span key={project.id}>{project.name}</span>
-                    ))}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
+          </thead>return (
+  <tbody>
+    {timereports.map((timereport) => (
+      <tr key={timereport.id}>
+        <td>{timereport.properties.Date.date.start}</td>
+        <td>
+          {timereport.properties.EmployeeRelation.relation.map((employeeRelation) => {
+            const matchedEmployee = employees.find(employee => employee.id === employeeRelation.id);
+
+            return(
+              <span key={matchedEmployee.id}>
+                {matchedEmployee.properties.Name.title[0].plain_text}
+              </span>
+            );
+          })}
+        </td>
+        <td>{timereport.properties.Hours.number}</td>
+        <td>{timereport.properties.Note.title[0].plain_text}</td>
+        <td>
+          {timereport.properties.Project.relation.map((projectRelation) => {
+            const matchingProject = projects.find(project => project.id === projectRelation.id);
+            
+            return (
+              <span key={projectRelation.id}>
+                {matchingProject.properties.Name.title[0].plain_text}
+              </span>
+            )
+          })}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+);
         </table>
       </div>
     </div>
   );
 };
 
-// Exportera komponenten för att kunna användas i andra delar av applikationen.
 export default NotionTimereportsReader;
