@@ -21,14 +21,22 @@
 }
   .login-status{
     color:white;
-  }
+      display: flex;
+      align-items: center;
+}
+
+.login-status .span:hover {
+  text-decoration: underline whitesmoke;
+  font-size: 20px; 
+  text-shadow: 5px 5px 5px black;
+}
   
   .login-popup label {
     display:flex;
     justify-content: center;
     font-size: 18px;
     line-height: 42px;
-    color: white;
+    color: rgb(255, 255, 255);
   }
   
   .login-popup input {
@@ -63,37 +71,27 @@
     cursor: pointer;
   }
 
-  .login-status .span:hover {
-    text-decoration: underline whitesmoke;
-    font-size: 20px; 
-    text-shadow: 5px 5px 5px black;
-  }
-
   .login-container {
     display: flex;
-    justify-content: space-between; /* Justera avståndet mellan element till att vara lika stort */
+    justify-content: space-between; 
     align-items: center;
+    margin-left: 10rem;
+    white-space: nowrap;
+    cursor: pointer;
   }
-  
-  .login-status {
-    display: flex;
-    align-items: center;
-  }
-  
+
   .logout-popup {
-    margin-left: 10px; 
+    margin-left: 1rem;
   }
   
   .logout-button {
     font-size: 15px;
-    padding: 8px 16px; 
-    background-color: #ffffff; 
-    color: rgb(51, 49, 49); 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
+    padding: 8px 10px; 
+    color: rgb(255, 255, 255); 
+    cursor: pointer;
+    background-color: transparent; 
   }
   
   .logout-button:hover {
-    background-color: #ebdddb; 
+    font-size: 18px; 
   }

@@ -50,7 +50,7 @@ const Login = () => {
   return (
     <div className="login-container">
       {/* Render icon and Logged in message */}
-      <div className="login-status" onClick={handleIconClick}>
+      <div className="login-status">
         {isLoggedIn ? (
           <>
             <span className="span">
@@ -68,7 +68,7 @@ const Login = () => {
             </div>
           </>
         ) : (
-          <span className="span">
+          <span className="span" onClick={handleIconClick}>
             <SlLogin />
             Login
           </span>
