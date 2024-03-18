@@ -65,6 +65,8 @@
 
   .login-status .span:hover {
     text-decoration: underline whitesmoke;
+    font-size: 20px; 
+    text-shadow: 5px 5px 5px black;
   }
 
   .login-container {

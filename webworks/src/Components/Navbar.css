@@ -24,8 +24,9 @@ header h1 {
 }
 .nav-link:hover,
 .nav-link:focus{
-    color:#c0cadb;
-    background-color: #b6afaf;
+    text-decoration: underline whitesmoke;
+    font-size: 20px; 
+    text-shadow: 5px 5px 5px black;
 }
 .nav-links li{
     margin:10px 0;
