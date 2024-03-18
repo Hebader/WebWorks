@@ -47,6 +47,10 @@ const Login = () => {
     }
   };
 
+  const handleClose = () => {
+    setShowLoginForm(false);
+  };
+
   return (
     <div className="login-container">
       {/* Render icon and Logged in message */}
@@ -78,6 +82,7 @@ const Login = () => {
       {/* Render login form */}
       {showLoginForm && (
         <div className="login-popup">
+        <button className="close-button" onClick={handleClose}>X</button>
           <form onSubmit={handleLogin}>
             <div className="userlogin">
               <label htmlFor="name">Username:</label>
@@ -97,7 +102,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button type="submit">Login</button>
+            <button className="login-button"type="submit">Login</button>
           </form>
           {loginStatus && <p>{loginStatus}</p>}
         </div>

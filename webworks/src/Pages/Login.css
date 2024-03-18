@@ -1,6 +1,6 @@
 .login-popup {
-    height: 35vh;
-    width: 15vw;
+    height: 35%;
+    width: 15%;
     background-color: rgb(68, 68, 68, 2.4);
     position: fixed;
     transform: translate(-50%, -50%);
@@ -60,8 +60,8 @@
     justify-content: center;
     align-items: center;
   }
-  .login-popup button {
-    margin-top: 50px;
+  .login-popup .login-button {
+    margin-top: 35px;
     width: 50%;
     background-color: #ffffff;
     color: #000000;
@@ -93,5 +93,23 @@
   }
   
   .logout-button:hover {
+
+    background-color: #ebdddb; 
+  }
+  
+  .login-popup .close-button{
+    position: absolute;
+    top: 15px; /* Justera toppmarginalen efter behov */
+    right: 15px;
+    margin-top: 3px; /* Justera utrymmet för stängningsknappen om det behövs */
+    font-size: 15px; /* Ange en annan storlek för stängningsknappen */
+    border: none; /* Ta bort gränsen för stängningsknappen om det behövs */
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: rgb(68, 68, 68, 2.4);
+    color: whitesmoke;
+  }
+
     font-size: 18px; 
   }
+
