@@ -11,7 +11,6 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showLogoutPopup, setShowLogoutPopup] = useState(false); // State to manage the visibility of the logout button popup
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,12 +37,11 @@ const Login = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setLoginStatus('');
-    setShowLogoutPopup(false);
   };
 
   const handleIconClick = () => {
     if (isLoggedIn) {
-      setShowLogoutPopup(!showLogoutPopup);
+      handleLogout();
     } else {
       setShowLoginForm(true);
     }
@@ -51,45 +49,24 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {isLoggedIn
-        ? showLogoutPopup && (
-            <div className="logout-popup">
-              <button onClick={handleLogout}>Log out</button>
-            </div>
-          )
-        : showLoginForm && (
-            <div className="login-popup">
-              <form onSubmit={handleLogin}>
-                <div className="userlogin">
-                  <label htmlFor="name">Username:</label>
-                  <input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div className="userlogin">
-                  <label htmlFor="password">Password:</label>
-                  <input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <button type="submit">Login</button>
-              </form>
-              {loginStatus && <p>{loginStatus}</p>}
-            </div>
-          )}
-      {/* Render icon */}
+      {/* Render icon and Logged in message */}
       <div className="login-status" onClick={handleIconClick}>
         {isLoggedIn ? (
-          <span className="span">
-            <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green' }} />{' '}
-            Logged in
-          </span>
+          <>
+            <span className="span">
+              <FontAwesomeIcon
+                icon={faCheckCircle}
+                style={{ color: 'green' }}
+              />{' '}
+              Logged in
+            </span>
+            {/* Render logout button */}
+            <div className="logout-popup">
+              <button className="logout-button" onClick={handleLogout}>
+                Log out
+              </button>
+            </div>
+          </>
         ) : (
           <span className="span">
             <SlLogin />
@@ -97,6 +74,34 @@ const Login = () => {
           </span>
         )}
       </div>
+
+      {/* Render login form */}
+      {showLoginForm && (
+        <div className="login-popup">
+          <form onSubmit={handleLogin}>
+            <div className="userlogin">
+              <label htmlFor="name">Username:</label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="userlogin">
+              <label htmlFor="password">Password:</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button type="submit">Login</button>
+          </form>
+          {loginStatus && <p>{loginStatus}</p>}
+        </div>
+      )}
     </div>
   );
 };

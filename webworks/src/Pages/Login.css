@@ -67,6 +67,31 @@
     text-decoration: underline whitesmoke;
   }
 
-  .logout-popup button{
+  .login-container {
+    display: flex;
+    justify-content: space-between; /* Justera avståndet mellan element till att vara lika stort */
+    align-items: center;
+  }
+  
+  .login-status {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logout-popup {
+    margin-left: 10px; 
+  }
+  
+  .logout-button {
     font-size: 15px;
+    padding: 8px 16px; 
+    background-color: #ffffff; 
+    color: rgb(51, 49, 49); 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+  }
+  
+  .logout-button:hover {
+    background-color: #ebdddb; 
   }
