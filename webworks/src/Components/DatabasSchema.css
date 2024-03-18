@@ -1,0 +1,72 @@
+/* DatabasSchema.css */
+
+.App {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex; /* Använd Flexbox för att placera sektioner bredvid varandra */
+  flex-wrap: wrap; /* Låt sektionerna lägga sig ned när de inte får plats */
+}
+
+form {
+  margin-bottom: 20px;
+  flex: 1; /* Så att formuläret tar upp all tillgänglig plats */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+select, input[type="number"], textarea {
+  width: calc(100% - 16px); /* Använd calc för att ta hänsyn till padding och border */
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 5px;
+}
+
+/* Databasschema styling */
+
+.DatabaseSection {
+  margin-top: 50px;
+  flex: 1; /* Så att sektionen tar upp all tillgänglig plats */
+}
+
+.DatabaseSection h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.DatabaseSection ul {
+  padding-left: 20px;
+  border-left: 2px solid #333;
+}
+
+.DatabaseSection ul li {
+  margin-bottom: 5px;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './DatabasSchema.css';
 
 function DatabasSchema() {
   const [users, setUsers] = useState([]);
@@ -56,10 +57,9 @@ function DatabasSchema() {
 
   return (
     <div className="App">
-      <h1>Database Schema</h1>
       {/* Tidloggningsformulär */}
       <div>
-        <h2>Log Time</h2>
+        <h1>Log Time</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label>User:</label>
@@ -100,7 +100,7 @@ function DatabasSchema() {
 
       {/* Databasschema */}
       <div>
-        <h2>Database Schema</h2>
+        <h1>Database Schema</h1>
         <h3>Users</h3>
         <ul>
           {users.map(user => (
