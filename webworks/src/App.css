@@ -56,3 +56,7 @@ input[type=text]::placeholder, input[type=email]::placeholder, input[type=number
   margin-top: 1em;
   color:white;
 }
+ 
+body {
+  zoom: 70%; /* Justera detta värde för att ändra zoomnivån, till exempel 90% för att zooma ut till 90% av standardstorleken */
+}
