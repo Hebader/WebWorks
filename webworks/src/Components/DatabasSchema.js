@@ -3,7 +3,7 @@ import axios from 'axios';
 import './DatabasSchema.css';
 
 function DatabasSchema() {
-  const [users, setUsers] = useState([]);
+  const [date, setDate] = useState([]);
   const [projects, setProjects] = useState([]);
   const [timeLogs, setTimeLogs] = useState([]);
   const [duration, setDuration] = useState('');
@@ -11,27 +11,30 @@ function DatabasSchema() {
 
   useEffect(() => {
     // Hämta användare, projekt och tidsloggar från backend
-    axios.get('http://localhost:3001/api/users')
-      .then(response => {
-        setUsers(response.data);
+    axios
+      .get('http://localhost:3001/api/date')
+      .then((response) => {
+        setDate(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
 
-    axios.get('http://localhost:3001/api/projects')
-      .then(response => {
+    axios
+      .get('http://localhost:3001/api/projects')
+      .then((response) => {
         setProjects(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
 
-    axios.get('http://localhost:3001/api/timelogs')
-      .then(response => {
+    axios
+      .get('http://localhost:3001/api/timelogs')
+      .then((response) => {
         setTimeLogs(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }, []);
@@ -41,13 +44,14 @@ function DatabasSchema() {
 
     try {
       await axios.post('http://localhost:3001/api/logtime', {
-        userId: users[0].id, // Du måste anpassa detta beroende på hur du hanterar användarautentisering
         projectId: projects[0].id, // Anpassa detta beroende på hur du väljer projekt
+        date,
         duration,
-        description
+        description,
       });
 
       // Återställ formuläret efter att tiden har loggats
+      setDate('');
       setDuration('');
       setDescription('');
     } catch (error) {
@@ -56,76 +60,77 @@ function DatabasSchema() {
   };
 
   return (
-    <div className="App">
+    <div className="Timelogging">
       {/* Tidloggningsformulär */}
-      <div>
+      <div className="TimelogSection">
         <h1>Log Time</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>User:</label>
-            <select>
-              {users.map(user => (
-                <option key={user.id} value={user.id}>{user.name}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label>Project:</label>
-            <select>
-              {projects.map(project => (
-                <option key={project.id} value={project.id}>{project.name}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label>Duration (hours):</label>
-            <input
-              type="number"
-              value={duration}
-              onChange={(e) => setDuration(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Description:</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-          <button type="submit">Log Time</button>
-        </form>
+        <div className="timelog-form">
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Project:</label>
+              <select>
+                {projects.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label>Date (date):</label>
+              <input
+                type="date"
+                value={Date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Duration (hours):</label>
+              <input
+                type="number"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Description:</label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+            <button type="submit">Log Time</button>
+          </form>
+        </div>
       </div>
 
-
-
       {/* Databasschema */}
-      <div>
+      <div className="DatabaseSection">
         <h1>Database Schema</h1>
-        <h3>Users</h3>
-        <ul>
-          {users.map(user => (
-            <li key={user.id}>
-              {user.name}
-            </li>
-          ))}
-        </ul>
-        <h3>Projects</h3>
-        <ul>
-          {projects.map(project => (
-            <li key={project.id}>
-              {project.name}
-            </li>
-          ))}
-        </ul>
-        {/* Lägg till mer detaljer om projekt om det behövs */}
-        <h3>Time Logs</h3>
-        <ul>
-          {timeLogs.map(log => (
-            <li key={log.id}>
-              User: {log.userId}, Project: {log.projectId}, Duration: {log.duration}, Description: {log.description}
-            </li>
-          ))}
-        </ul>
+        <div className="h3Section">
+          <h3>Users</h3>
+          <ul>
+            {users.map((user) => (
+              <li key={user.id}>{user.name}</li>
+            ))}
+          </ul>
+          <h3>Projects</h3>
+          <ul>
+            {projects.map((project) => (
+              <li key={project.id}>{project.name}</li>
+            ))}
+          </ul>
+          {/* Lägg till mer detaljer om projekt om det behövs */}
+          <h3>Time Logs</h3>
+          <ul>
+            {timeLogs.map((log) => (
+              <li key={log.id}>
+                User: {log.userId}, Project: {log.projectId}, Duration:{' '}
+                {log.duration}, Description: {log.description}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
