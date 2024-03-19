@@ -1,15 +1,22 @@
 /* DatabasSchema.css */
 
-.App {
+.Timelogging {
   font-family: Arial, sans-serif;
-  max-width: 800px;
+  max-width: 50vw;
   margin: 0 auto;
   padding: 20px;
   display: flex; /* Använd Flexbox för att placera sektioner bredvid varandra */
+  margin-top: 50px;
+  justify-content: space-between;
   flex-wrap: wrap; /* Låt sektionerna lägga sig ned när de inte får plats */
+
 }
 
-form {
+.TimelogSection{
+  margin: 0 100px 100px 100px;
+}
+
+.timelog-form {
   margin-bottom: 20px;
   flex: 1; /* Så att formuläret tar upp all tillgänglig plats */
 }
@@ -53,20 +60,26 @@ ul li {
 /* Databasschema styling */
 
 .DatabaseSection {
-  margin-top: 50px;
-  flex: 1; /* Så att sektionen tar upp all tillgänglig plats */
+
 }
 
-.DatabaseSection h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+.DatabaseSection h1 {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.DatabaseSection .h3Section {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 100px 100px 100px;
 }
 
 .DatabaseSection ul {
-  padding-left: 20px;
-  border-left: 2px solid #333;
+  padding: 20px;
 }
 
 .DatabaseSection ul li {
   margin-bottom: 5px;
 }
+
