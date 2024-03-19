@@ -38,6 +38,11 @@ const Navbar = () => {
               Timereports
             </Link>
           </li>
+          <li>
+            <Link to="/MyData" className="nav-link">
+              MyData
+            </Link>
+          </li>
         </ul>
         <Login isLoggedIn={isLoggedIn} />
       </div>

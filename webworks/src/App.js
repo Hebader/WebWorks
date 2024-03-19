@@ -7,6 +7,7 @@ import Projects from './Pages/Projects';
 import Employees from './Pages/Employees';
 import Timereports from './Pages/Timereports';
 import Footer from './Components/Footer';
+import MyData from './Pages/Mydata';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/Projects" element={<Projects />} />
             <Route path="/Employees" element={<Employees />} />
             <Route path="/Timereports" element={<Timereports />} />
+            <Route path="/MyData" element={<MyData />} />
           </Routes>
         </main>
         <footer className="site-footer">
