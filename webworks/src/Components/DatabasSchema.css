@@ -2,14 +2,14 @@
 
 .Timelogging {
   font-family: Arial, sans-serif;
-  max-width: 50vw;
+  max-width: 70vw;
   margin: 0 auto;
   padding: 20px;
   display: flex; /* Använd Flexbox för att placera sektioner bredvid varandra */
   margin-top: 50px;
   justify-content: space-between;
-  flex-wrap: wrap; /* Låt sektionerna lägga sig ned när de inte får plats */
-
+  flex-wrap: wrap;
+ 
 }
 
 .TimelogSection{
@@ -69,11 +69,13 @@ ul li {
   justify-content: center;
 }
 
-.DatabaseSection .h3Section {
+.h3Section {
   display: flex;
   justify-content: space-between;
   margin: 0 100px 100px 100px;
+  flex-wrap: nowrap;
 }
+
 
 .DatabaseSection ul {
   padding: 20px;
