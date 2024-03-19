@@ -10,9 +10,15 @@ const NotionTimereportsReader = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const timereportsResponse = await axios.post('http://localhost:3001/api/notion/databas3');
-        const employeesResponse = await axios.post('http://localhost:3001/api/notion/databas2');
-        const projectsResponse = await axios.post('http://localhost:3001/api/notion/databas1');
+        const timereportsResponse = await axios.post(
+          'http://localhost:3001/api/notion/databas3'
+        );
+        const employeesResponse = await axios.post(
+          'http://localhost:3001/api/notion/databas2'
+        );
+        const projectsResponse = await axios.post(
+          'http://localhost:3001/api/notion/databas1'
+        );
 
         setTimereports(timereportsResponse.data.results);
         setEmployees(employeesResponse.data.results);
@@ -25,7 +31,7 @@ const NotionTimereportsReader = () => {
 
     fetchData();
   }, []);
-  
+
   if (loading) {
     return <p>Loading data...</p>;
   }
@@ -44,38 +50,46 @@ const NotionTimereportsReader = () => {
               <th>Related Projects</th>
             </tr>
           </thead>
-  <tbody>
-    {timereports.map((timereport) => (
-      <tr key={timereport.id}>
-        <td>{timereport.properties.Date.date.start}</td>
-        <td>
-          {timereport.properties.EmployeeRelation.relation.map((employeeRelation) => {
-            const matchedEmployee = employees.find(employee => employee.id === employeeRelation.id);
+          <tbody>
+            {timereports.map((timereport) => (
+              <tr key={timereport.id}>
+                <td>{timereport.properties.Date.date.start}</td>
+                <td>
+                  {timereport.properties.EmployeeRelation.relation.map(
+                    (employeeRelation) => {
+                      const matchedEmployee = employees.find(
+                        (employee) => employee.id === employeeRelation.id
+                      );
 
-            return(
-              <span key={matchedEmployee.id}>
-                {matchedEmployee.properties.Name.title[0].plain_text}
-              </span>
-            );
-          })}
-        </td>
-        <td>{timereport.properties.Hours.number}</td>
-        <td>{timereport.properties.Note.title[0].plain_text}</td>
-        <td>
-          {timereport.properties.Project.relation.map((projectRelation) => {
-            const matchingProject = projects.find(project => project.id === projectRelation.id);
-            
-            return (
-              <span key={projectRelation.id}>
-                {matchingProject.properties.Name.title[0].plain_text}
-              </span>
-            )
-          })}
-        </td>
-      </tr>
-    ))}
-  </tbody>
-);
+                      return (
+                        <span key={matchedEmployee.id}>
+                          {matchedEmployee.properties.Name.title[0].plain_text}
+                        </span>
+                      );
+                    }
+                  )}
+                </td>
+                <td>{timereport.properties.Hours.number}</td>
+                <td>{timereport.properties.Note.title[0].plain_text}</td>
+                <td>
+                  {timereport.properties.Project.relation.map(
+                    (projectRelation) => {
+                      const matchingProject = projects.find(
+                        (project) => project.id === projectRelation.id
+                      );
+
+                      return (
+                        <span key={projectRelation.id}>
+                          {matchingProject.properties.Name.title[0].plain_text}
+                        </span>
+                      );
+                    }
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          );
         </table>
       </div>
     </div>

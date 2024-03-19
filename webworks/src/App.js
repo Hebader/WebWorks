@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import Projects from './Pages/Projects';
 import Employees from './Pages/Employees';
 import Timereports from './Pages/Timereports';
+import Timelogging from './Pages/Timelogging';
 import Footer from './Components/Footer';
 import MyData from './Pages/Mydata';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
@@ -25,7 +26,11 @@ export default function App() {
             <Route path="/Projects" element={<Projects />} />
             <Route path="/Employees" element={<Employees />} />
             <Route path="/Timereports" element={<Timereports />} />
+
             <Route path="/MyData" element={<MyData />} />
+
+            <Route path="/Timelogging" element={<Timelogging />} />
+
           </Routes>
         </main>
         <footer className="site-footer">

@@ -17,11 +17,11 @@ const NotionDataReader = () => {
       .then((response) => {
         // När anropet lyckas, uppdatera 'data'-state med svaret från API:t.
         setData(response.data);
-        console.log('Data hämtad från Notion:', response.data);
+        console.log('Data fetched from Notion:', response.data);
       })
       .catch((error) => {
         // Logga ett felmeddelande om anropet misslyckas.
-        console.error('Fel vid hämtning från Notion:', error);
+        console.error('Error fetching from Notion:', error);
       });
   };
 
@@ -33,7 +33,7 @@ const NotionDataReader = () => {
 
   // Rendera ett meddelande medan data laddas eller om ingen data finns att visa.
   if (!data || !Array.isArray(data?.results)) {
-    return <p>Laddar data eller ingen data att visa...</p>;
+    return <p>No data to display...</p>;
   }
 
   // Rendera en tabell med data från Notion om datan finns.
