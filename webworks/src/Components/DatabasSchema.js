@@ -108,12 +108,6 @@ function DatabasSchema() {
       <div className="DatabaseSection">
         <h1>Database Schema</h1>
         <div className="h3Section">
-          <h3>Users</h3>
-          <ul>
-            {users.map((user) => (
-              <li key={user.id}>{user.name}</li>
-            ))}
-          </ul>
           <h3>Projects</h3>
           <ul>
             {projects.map((project) => (
