@@ -7,7 +7,10 @@ function DatabasSchema() {
   const [projects, setProjects] = useState([]);
   const [timeLogs, setTimeLogs] = useState([]);
   const [duration, setDuration] = useState('');
-  const [description, setDescription] = useState('');
+  const [note, setNote] = useState('');
+  const [projectId, setProjectId] = useState('');
+
+  
 
   useEffect(() => {
     // Hämta användare, projekt och tidsloggar från backend
@@ -43,17 +46,17 @@ function DatabasSchema() {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:3001/api/logtime', {
-        projectId: projects[0].id, // Anpassa detta beroende på hur du väljer projekt
+      await axios.post('http://localhost:3001/api/projects', {
+        projectId: projectId, // Anpassa detta beroende på hur du väljer projekt
         date,
         duration,
-        description,
+        note,
       });
 
       // Återställ formuläret efter att tiden har loggats
       setDate('');
       setDuration('');
-      setDescription('');
+      setNote('');
     } catch (error) {
       console.error('Error logging time:', error);
     }
@@ -68,13 +71,9 @@ function DatabasSchema() {
           <form onSubmit={handleSubmit}>
             <div>
               <label>Project:</label>
-              <select>
-                {projects.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
+              <select onChange={(e) => setProjectId(e.target.value)}>   {projects.map((project) => (   
+                  <option key={project.id} value={project.id}>      {project.name}   
+                   </option>  ))} </select>
             </div>
             <div>
               <label>Date (date):</label>
@@ -93,10 +92,10 @@ function DatabasSchema() {
               />
             </div>
             <div>
-              <label>Description:</label>
+              <label>Note:</label>
               <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
               />
             </div>
             <button type="submit">Log Time</button>
@@ -120,7 +119,7 @@ function DatabasSchema() {
             {timeLogs.map((log) => (
               <li key={log.id}>
                 User: {log.userId}, Project: {log.projectId}, Duration:{' '}
-                {log.duration}, Description: {log.description}
+                {log.duration}, Note: {log.note}
               </li>
             ))}
           </ul>
