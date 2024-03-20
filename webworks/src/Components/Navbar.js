@@ -47,8 +47,11 @@ const Navbar = () => {
             <Link to="/Timelogging" className="nav-link">
               Timelogging
               </Link>
-
-          
+          </li>
+          <li>
+            <Link to="/DataComponents" className="nav-link">
+              DataComponent
+              </Link>
           </li>
         </ul>
         <Login isLoggedIn={isLoggedIn} />

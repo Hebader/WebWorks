@@ -12,27 +12,28 @@ function VisaNotionDataID() {
   useEffect(() => {
     const fetchDataCreatedByMe = async () => {
       try {
-        console.log('Fetching timereports');
+        // console.log('Fetching timereports');
         const timereportsResponse = await axios.post('http://localhost:3001/api/notion/databas3');
         console.log('Timereports response:', timereportsResponse.data);
 
-        console.log('Fetching employees');
+        // console.log('Fetching employees');
         const employeesResponse = await axios.post('http://localhost:3001/api/notion/databas2');
         console.log('Employees response:', employeesResponse.data);
 
-        console.log('Fetching projects');
+        // console.log('Fetching projects');
         const projectsResponse = await axios.post('http://localhost:3001/api/notion/databas1');
         console.log('Projects response:', projectsResponse.data);
 
         setProjects(projectsResponse.data.results);
         setEmployees(employeesResponse.data.results);
+        console.log(projectsResponse.data.results);
         
         const requestBody = {
           databaseId: 'e9d6cc1e1cd240a9b7f8c160921358e5',
           creatorId: 'e9e0e319-5b85-4857-9de6-763f3ead77a4'
         };
 
-        console.log('Fetching data from server');
+        // console.log('Fetching data from server');
         const response = await fetch('http://localhost:3001/getdatabasebyid', {
           method: 'POST',
           headers: {

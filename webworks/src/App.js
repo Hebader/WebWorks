@@ -9,6 +9,7 @@ import Timereports from './Pages/Timereports';
 import Timelogging from './Pages/Timelogging';
 import Footer from './Components/Footer';
 import MyData from './Pages/Mydata';
+import DataComponent from './Components/DataComponents';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/Timereports" element={<Timereports />} />
 
             <Route path="/MyData" element={<MyData />} />
+            <Route path="/DataComponents" element={<DataComponent />} />
 
             <Route path="/Timelogging" element={<Timelogging />} />
 
