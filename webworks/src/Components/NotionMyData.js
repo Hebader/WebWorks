@@ -70,7 +70,7 @@ function VisaNotionDataID() {
             <tr>
               <th>Name</th>
               <th>Total hours</th>
-              <th>status</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
