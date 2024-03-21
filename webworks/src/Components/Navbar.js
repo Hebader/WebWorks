@@ -48,6 +48,11 @@ const Navbar = () => {
               Timelogging
               </Link>
           </li>
+          <li>
+            <Link to="/DataComponents" className="nav-link">
+              DataComponent
+              </Link>
+          </li>
         </ul>
         <Login isLoggedIn={isLoggedIn} />
       </div>
