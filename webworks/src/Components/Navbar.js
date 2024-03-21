@@ -41,17 +41,12 @@ const Navbar = () => {
           <li>
             <Link to="/MyData" className="nav-link">
               MyData
-              </Link>
-           </li>
+            </Link>
+          </li>
           <li>
             <Link to="/Timelogging" className="nav-link">
               Timelogging
-              </Link>
-          </li>
-          <li>
-            <Link to="/DataComponents" className="nav-link">
-              DataComponent
-              </Link>
+            </Link>
           </li>
         </ul>
         <Login isLoggedIn={isLoggedIn} />
