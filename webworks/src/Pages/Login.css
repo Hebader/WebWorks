@@ -22,13 +22,11 @@
   .login-status{
     color:white;
       display: flex;
-      align-items: center;
+      align-items: center;    
 }
 
-.login-status .span:hover {
-  text-decoration: underline whitesmoke;
-  font-size: 20px; 
-  text-shadow: 5px 5px 5px black;
+.login-button{
+  cursor: pointer;
 }
   
   .login-popup label {
@@ -71,13 +69,22 @@
     cursor: pointer;
   }
 
+  .loggedInView{
+    cursor:context-menu;
+  }
+
   .login-container {
     display: flex;
+    flex-direction: column;
     justify-content: space-between; 
     align-items: center;
     margin-left: 10rem;
     white-space: nowrap;
-    cursor: pointer;
+  }
+
+  .logged-in-user {
+    color:white;
+    cursor:context-menu;
   }
 
   .logout-popup {
@@ -109,4 +116,6 @@
     background-color: rgb(68, 68, 68, 2.4);
     color: whitesmoke;
   }
+
+
 

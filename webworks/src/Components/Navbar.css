@@ -9,7 +9,9 @@ header h1 {
     display:flex;
     align-items:center;
     justify-content: center;
-    padding:10px
+    padding:10px;
+    color:white;
+    cursor:context-menu;
 }
 .nav-links{
     list-style: none;
