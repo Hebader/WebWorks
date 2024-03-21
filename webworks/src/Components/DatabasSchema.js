@@ -110,9 +110,7 @@ function DatabasSchema() {
         <div className="h3Section">
           <h3>Projects</h3>
           <ul>
-            {projects.map((project) => (
-              <li key={project.id}>{project.name}</li>
-            ))}
+            
           </ul>
           {/* Lägg till mer detaljer om projekt om det behövs */}
           <h3>Time Logs</h3>
