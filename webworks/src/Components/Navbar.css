@@ -1,5 +1,5 @@
 header h1 {
-    
+    margin-right: 8rem;
   }
 .navbar{
     width: 100%;
@@ -20,7 +20,7 @@ header h1 {
 .nav-link{
     text-decoration: none;
     color:white;
-    margin-right: 100px;
+    margin-right: 50px;
 }
 .nav-link:hover,
 .nav-link:focus{

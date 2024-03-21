@@ -70,9 +70,12 @@ function VisaNotionDataID() {
         <table className="table table-striped table-hover table-bordered rounded custom-rounded-table">
           <thead className="thead-dark">
             <tr>
+
               <th>Date</th>
               <th>Hours</th>
               <th>Project</th>
+              <th>Name</th>
+              <th>Total hours</th>
               <th>Status</th>
             </tr>
           </thead>
