@@ -8,6 +8,7 @@ import { SlLogin } from 'react-icons/sl';
 const Login = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [privateID, setPrivateID] = useState('');
   const [loginStatus, setLoginStatus] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
@@ -18,11 +19,13 @@ const Login = () => {
       const response = await axios.post('http://localhost:3001/login', {
         name,
         password,
+        privateID
       });
       setLoginStatus(response.data.message);
       if (response.status === 200) {
         setIsLoggedIn(true);
         setShowLoginForm(false);
+        localStorage.setItem('privateID', privateID);
         alert('login successful');
       } else {
         setIsLoggedIn(false);
