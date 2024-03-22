@@ -4,6 +4,7 @@ import './NotionDataReader.css';
 
 const NotionDataReader = () => {
   const [data, setData] = useState(null);
+  const [updatedData, setUpdatedData] = useState(null);
 
   // Definiera en funktion för att hämta data från Notion via din API-tjänst.
   const fetchDataFromNotion = () => {
@@ -31,6 +32,15 @@ const NotionDataReader = () => {
     fetchDataFromNotion();
   }, []);
 
+  // Funktion för att uppdatera timespan för ett visst objekt
+  const handleUpdateTimespan = (index) => {
+    const newData = [...data.results];
+    newData[index].properties.Timespan.date.start = updatedData.start;
+    newData[index].properties.Timespan.date.end = updatedData.end;
+    setData({ results: newData });
+    setUpdatedData(null);
+  };
+
   // Rendera ett meddelande medan data laddas eller om ingen data finns att visa.
   if (!data || !Array.isArray(data?.results)) {
     return <p>No data to display...</p>;
@@ -49,7 +59,8 @@ const NotionDataReader = () => {
               <th>Hours</th>
               <th>Worked hours</th>
               <th>Hours left</th>
-              {<th>Timespan</th>}
+              <th>Timespan</th>
+              <th>Uppdate time</th> {/* Ny kolumn för att inkludera actions */}
             </tr>
           </thead>
           <tbody>
@@ -97,6 +108,39 @@ const NotionDataReader = () => {
                         ' → ' +
                         formatDate(page.properties.Timespan.date.end)
                       : 'Timespan'}
+                  </td>
+                  <td>
+                    <div className="d-flex">
+                      {/* Inmatningsfält för startdatum */}
+                      <input
+                        type="date"
+                        value={updatedData?.start ?? ''}
+                        onChange={(e) =>
+                          setUpdatedData({
+                            ...updatedData,
+                            start: e.target.value,
+                          })
+                        }
+                      />
+                      {/* Inmatningsfält för slutdatum */}
+                      <input
+                        type="date"
+                        value={updatedData?.end ?? ''}
+                        onChange={(e) =>
+                          setUpdatedData({
+                            ...updatedData,
+                            end: e.target.value,
+                          })
+                        }
+                      />
+                      {/* Knapp för att uppdatera timespan */}
+                      <button
+                        className="btn btn-primary ml-2"
+                        onClick={() => handleUpdateTimespan(index)}
+                      >
+                        Update
+                      </button>
+                    </div>
                   </td>
                 </tr>
               );
