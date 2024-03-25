@@ -11,8 +11,6 @@ function DatabasSchema() {
   const [message, setMessage] = useState('');
   const [employees, setEmployees] = useState([]);
   const [employeeId, setEmployeeId] = useState('');
-  const [selectedProject, setSelectedProject] = useState('');
-  const [selectedEmployee, setSelectedEmployee] = useState('');
   const [timeReports, setTimeReports] = useState([]);
 
   useEffect(() => {
@@ -46,9 +44,6 @@ function DatabasSchema() {
       const selectedEmployeeName = employees.find(
         (employee) => employee.id === employeeId
       )?.name;
-
-      setSelectedProject(selectedProjectName);
-      setSelectedEmployee(selectedEmployeeName);
 
       const response = await axios.post('http://localhost:3001/api/logtime', {
         project: projectId,
@@ -102,44 +97,49 @@ function DatabasSchema() {
         <h1>Log Time</h1>
         {message && <p>{message}</p>}
         <div className="timelog-form">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Project:</label>
-              <select onChange={(e) => setProjectId(e.target.value)}>
-                <option value="">Select a project...</option>
-                {projects.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
+          <form onSubmit={handleSubmit} className="form-logtime">
+            <div className="form-row">
+              <div>
+                <label>Project:</label>
+                <select onChange={(e) => setProjectId(e.target.value)}>
+                  <option value="">Select a project...</option>
+                  {projects.map((project) => (
+                    <option key={project.id} value={project.id}>
+                      {project.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label>Employee:</label>
+                <select onChange={(e) => setEmployeeId(e.target.value)}>
+                  <option value="">Select employee...</option>
+                  {employees.map((employee) => (
+                    <option key={employee.id} value={employee.id}>
+                      {employee.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div>
-              <label>Employee:</label>
-              <select onChange={(e) => setEmployeeId(e.target.value)}>
-                <option value="">Select employee...</option>
-                {employees.map((employee) => (
-                  <option key={employee.id} value={employee.id}>
-                    {employee.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label>Date (date):</label>
-              <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Hours:</label>
-              <input
-                type="number"
-                value={hours}
-                onChange={(e) => setHours(e.target.value)}
-              />
+            <div className="form-row">
+              <div>
+                <label>Date (date):</label>
+                <input
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className="date-input"
+                />
+              </div>
+              <div>
+                <label>Hours:</label>
+                <input
+                  type="number"
+                  value={hours}
+                  onChange={(e) => setHours(e.target.value)}
+                />
+              </div>
             </div>
             <div>
               <label>Note:</label>
@@ -148,7 +148,9 @@ function DatabasSchema() {
                 onChange={(e) => setNote(e.target.value)}
               />
             </div>
-            <button type="submit">Log Time</button>
+            <button className="button-logtime" type="submit">
+              Log Time
+            </button>
           </form>
         </div>
       </div>
@@ -158,25 +160,34 @@ function DatabasSchema() {
         {/* Visa den senaste tidrapporten endast om "Time logged successfully!" meddelande visas */}
         {message === 'Time logged successfully!' && (
           <div>
-            <h1>New timereport logged:</h1>
-            <p>Project: {selectedProject}</p>
-            <p>Employee: {selectedEmployee}</p>
-            <p>Date: {date}</p>
-            <p>Hours: {hours}</p>
-            <p>Note: {note}</p>
+            <h1>Time logged:</h1>
+            {timeReports.map((report, index) => (
+              <div key={index}>
+                <div
+                  className={
+                    index % 2 === 0 ? 'newTimereport even' : 'newTimereport odd'
+                  }
+                >
+                  <p>
+                    <strong>Project:</strong> {report.project}
+                  </p>
+                  <p>
+                    <strong>Employee:</strong> {report.employee}
+                  </p>
+                  <p>
+                    <strong>Date:</strong> {report.date}
+                  </p>
+                  <p>
+                    <strong>Hours:</strong> {report.hours}
+                  </p>
+                  <p>
+                    <strong>Note:</strong> {report.note}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         )}
-        {/* Visa alla tidigare tidrapporter */}
-        <h3>Previous time logs:</h3>
-        {timeReports.map((report, index) => (
-          <div key={index}>
-            <p>Project: {report.project}</p>
-            <p>Employee: {report.employee}</p>
-            <p>Date: {report.date}</p>
-            <p>Hours: {report.hours}</p>
-            <p>Note: {report.note}</p>
-          </div>
-        ))}
       </div>
     </div>
   );
