@@ -38,6 +38,15 @@ const NotionDataReader = () => {
     newData[index].properties.Timespan.date.start = updatedData.start;
     newData[index].properties.Timespan.date.end = updatedData.end;
     setData({ results: newData });
+ 
+    try {
+      axios
+      .patch("http://localhost:3001/api/notion/timespan", {pageId:data.results[index].id, start:data.results[index].properties.Timespan.date.start, end: data.results[index].properties.Timespan.date.end})
+      
+      
+    } catch (error) {
+      console.error('Error updating project timespan from Notion:', error);
+    }
     setUpdatedData(null);
   };
 
