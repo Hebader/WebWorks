@@ -1,10 +1,18 @@
-import "./Home.css";
+import './Home.css';
 
 const Home = () => {
-  return(
-    <div>
-      <img src="https://cdn.pixabay.com/photo/2018/05/23/13/29/network-3424070_1280.jpg" alt="cool technology image"/>
+  return (
+    <div className="welcome-container">
+      <div className="welcome">
+        <h1>Välkommen till Webworks!</h1>
+        <img
+          src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg" // Använd src-attributet för att ladda bilden
+          alt="Backround for welcome container"
+          className="background-image"
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
+
 export default Home;

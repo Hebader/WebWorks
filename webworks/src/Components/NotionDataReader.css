@@ -20,12 +20,11 @@ td {
 }
 
 td:first-child {
-    color: #242329;
+    color: #000000;
 }
 
 tr:nth-child(even) {
-    background-color: rgb(29, 28, 28);
-    background-color: rgba(62, 62, 62, 0.6);
+    background-color: rgba(109, 140, 177, 0.452);
 }
 .mb-4{
     display: flex;
