@@ -28,14 +28,14 @@ const Login = () => {
       const response = await axios.post('http://localhost:3001/login', {
         name,
         password,
-        privateID,
+        privateID
       });
       setLoginStatus(response.data.message);
       if (response.status === 200) {
         setIsLoggedIn(true);
         setShowLoginForm(false);
         setLoggedInUser(name);
-        localStorage.setItem('privateID', privateID);
+        localStorage.setItem('userID', response.data.privateID);
         localStorage.setItem('loggedIn', name);
         alert('login successful');
       } else {

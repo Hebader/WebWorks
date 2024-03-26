@@ -10,15 +10,34 @@ function formatDate(dateObject) {
 }
  
 // Komponent för att visa en enskild tidrapport som en tabellrad (<tr>).
-function TimeReport({ report }) {
+function TimeReport({ report, projects, employees}) {
   return (
     <tr>
       <td>{formatDate(report.properties.Date.date)}</td>
       <td>
         {report.properties.Hours ? report.properties.Hours.number : "N/A"} {/* Visar antal timmar eller "N/A" om inte tillgängligt. */}
       </td>
-      <td>{/* Plats för ytterligare data. */}</td>
-      <td>{/* Ytterligare kolumner kan läggas till här om nödvändigt. */}</td>
+      <td>
+        {report.properties.Project.relation.map(projectRelation => {
+        const matchingProject = projects.find(project => project.id === projectRelation.id);
+        return (
+          <span key={projectRelation.id}>
+            {matchingProject && matchingProject.name} {/* Rendera bara namnet från matchingProject */}
+          </span>
+        );
+        })}
+      </td>
+      <td>
+        {report.properties.EmployeeRelation?.relation?.map((employeeRelation) => {
+          const matchedEmployee = employees.find(employee => employee.id === employeeRelation.id);
+          
+          return (
+            <span key={matchedEmployee?.id}>
+              {matchedEmployee && matchedEmployee.name}
+            </span>
+          );
+        })}
+      </td>
     </tr>
   );
 }
@@ -29,14 +48,22 @@ function VisaNotionDataID() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [timereports, setTimereports] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [employees, setEmployees] = useState([]);
+
  
   // useEffect körs vid komponentens första rendering och hämtar data från servern.
   useEffect(() => {
     const fetchDataCreatedByMe = async () => {
       try {
+        const privateID = localStorage.getItem('userID');
+        const projectsResponse = await axios.get('http://localhost:3001/api/projects');
+        setProjects(projectsResponse.data);
+        const employeesResponse = await axios.get('http://localhost:3001/api/employees');
+        setEmployees(employeesResponse.data);
         const requestBody = {
           databaseId: "e9d6cc1e1cd240a9b7f8c160921358e5",
-          privateID: "44444",
+          privateID: privateID,
         };
         // Använder axios för att göra en POST-förfrågan med requestBody.
         const response = await axios.post(
@@ -75,14 +102,12 @@ function VisaNotionDataID() {
               <th>Hours</th>
               <th>Project</th>
               <th>Name</th>
-              <th>Total hours</th>
-              <th>Status</th>
             </tr>
           </thead>
           <tbody>
             {/* Mapper över varje tidrapport och använder TimeReport-komponenten för att visa varje rad. */}
             {timereports.map((report, index) => (
-              <TimeReport key={index} report={report} />
+              <TimeReport key={index} report={report} projects={projects} employees={employees}/>
             ))}
           </tbody>
         </table>
