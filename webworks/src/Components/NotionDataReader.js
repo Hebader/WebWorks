@@ -69,7 +69,7 @@ const NotionDataReader = () => {
               <th>Worked hours</th>
               <th>Hours left</th>
               <th>Timespan</th>
-              <th>Uppdate timespan</th> {/* Ny kolumn för att inkludera actions */}
+              <th>Update timespan</th> {/* Ny kolumn för att inkludera actions */}
             </tr>
           </thead>
           <tbody>
