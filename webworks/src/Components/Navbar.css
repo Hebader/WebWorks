@@ -24,6 +24,7 @@ header h1{
     }
     .nav-links{
         flex-wrap: wrap;
+        margin: 0px;
     }
   }
 .nav-links{

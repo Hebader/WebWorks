@@ -24,6 +24,12 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!name || !password) {
+      alert('Please fill in all fields');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:3001/login', {
         name,
