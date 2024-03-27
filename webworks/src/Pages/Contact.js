@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
- 
+import './Contact.css';
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -7,7 +8,7 @@ export default function Contact() {
     email: '',
     message: '',
   });
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -15,12 +16,12 @@ export default function Contact() {
       [name]: value,
     }));
   };
- 
+
   const handeSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
   };
- 
+
   return (
     <div className="content-container">
       <div className="contact-text">
@@ -31,10 +32,10 @@ export default function Contact() {
         <form className="form-container">
           <label for="name">*Name:</label>
           <input type="text" placeholder="Name..." id="name" name="name" />
- 
+
           <label for="email">*Email:</label>
           <input type="email" placeholder="Email..." id="email" name="email" />
- 
+
           <label for="number">*Phone number:</label>
           <input
             type="number"
@@ -42,7 +43,7 @@ export default function Contact() {
             id="number"
             name="number"
           />
- 
+
           <label for="message">*Message:</label>
           <textarea
             id="message"

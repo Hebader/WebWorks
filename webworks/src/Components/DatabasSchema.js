@@ -81,7 +81,7 @@ function DatabasSchema() {
     e.preventDefault();
 
     // Kontrollera om alla fält är ifyllda
-    if (!projectId || !employeeId || !date || !hours || !note) {
+    if (!projectId || !employeeId || !date || !hours) {
       setMessage('Please fill in all fields.');
       return;
     }
@@ -101,7 +101,7 @@ function DatabasSchema() {
             <div className="form-row">
               <div>
                 <label>Project:</label>
-                <select onChange={(e) => setProjectId(e.target.value)}>
+                <select onChange={(e) => setProjectId(e.target.value)} required>
                   <option value="">Select a project...</option>
                   {projects.map((project) => (
                     <option key={project.id} value={project.id}>
@@ -112,7 +112,10 @@ function DatabasSchema() {
               </div>
               <div>
                 <label>Employee:</label>
-                <select onChange={(e) => setEmployeeId(e.target.value)}>
+                <select
+                  onChange={(e) => setEmployeeId(e.target.value)}
+                  required
+                >
                   <option value="">Select employee...</option>
                   {employees.map((employee) => (
                     <option key={employee.id} value={employee.id}>
@@ -130,6 +133,7 @@ function DatabasSchema() {
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                   className="date-input"
+                  required
                 />
               </div>
               <div>
@@ -138,6 +142,7 @@ function DatabasSchema() {
                   type="number"
                   value={hours}
                   onChange={(e) => setHours(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -148,7 +153,7 @@ function DatabasSchema() {
                 onChange={(e) => setNote(e.target.value)}
               />
             </div>
-            <button className="button-logtime" type="submit">
+            <button className="button" type="submit">
               Log Time
             </button>
           </form>

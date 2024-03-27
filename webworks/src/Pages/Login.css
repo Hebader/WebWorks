@@ -1,17 +1,15 @@
 .login-popup {
     height: 35%;
     width: 15%;
-    background-color: rgb(68, 68, 68, 2.4);
     position: fixed;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background-color: lightsteelblue;
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
     font-family: 'Poppins', sans-serif;
-    background-color: rgb(68, 68, 68, 2.4);
   }
 
 .userlogin{
@@ -27,6 +25,12 @@
 
 .login-button{
   cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.login-button:hover{
+  font-size: larger;
 }
   
   .login-popup label {
@@ -39,17 +43,13 @@
   
   .login-popup input {
     display:flex;
+    justify-content: center;
     align-items: center;
-    height: 30px;
-    background-color: rgb(58, 58, 58);
-    color:white;
+    background-color: white;
+    color:rgb(0, 0, 0);
     border-radius: 3px;
-    margin-top: 8px;
+    width: 100%;
     font-size: 18px;
-    font-weight: 300;
-    width: calc(80% - 20px);
-    margin: 0 auto;
-    background-color:rgba(0, 0, 0, 0.468);
   }
   
   form{
@@ -57,16 +57,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: lightsteelblue;
   }
-  .login-popup .login-button {
+
+  .login-form-button {
     margin-top: 35px;
     width: 50%;
-    background-color: lightsteelblue;
+    background-color: whitesmoke;
     color: #000000;
     padding: 15px 0;
     font-size: 20px;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  .login-form-button:hover{
+    background-color:rgb(109, 127, 150);
   }
 
   .loggedInView{
@@ -92,7 +98,7 @@
   }
   
   .logout-button {
-    background-color: rgb(123, 148, 182);;
+    background-color: rgb(123, 148, 182);
     color: white;
     padding: 5px 10px 5px 5px;
     border: none;

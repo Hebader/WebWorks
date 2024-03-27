@@ -1,0 +1,59 @@
+/*KONTAKT FORMULÄR*/
+.contact-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+  .contact-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .form-container{
+    display:flex;
+    flex-direction: column;
+    width: 40vh;
+    padding: 0 2em;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.274);
+    background-color: lightsteelblue;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-container label {
+    margin: 0.5em 0;
+    color: black;
+  }
+  
+  input[type=submit], [type=reset]{
+    margin-top: 1em;
+    background-color: whitesmoke;
+    padding: 2% 8px;
+    cursor:pointer;
+    transition: transform .5s;
+  
+  }
+  input[type=submit]:hover, [type=reset]:hover{
+    background-color: rgb(255, 255, 255);
+    transform: scale(1.1)
+  }
+  
+  input[type=text],[type=email],[type=number],[id=message]{
+    color: rgba(0, 0, 0, 0.904);
+    margin:0;
+    padding:0;
+  }
+  
+  input[type=text]::placeholder, input[type=email]::placeholder, input[type=number]::placeholder, textarea::placeholder {
+    color: rgba(65, 80, 87, 0.5);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .contact-container p{
+    font-size: 12px;
+    margin-top: 1em;
+    color:black;
+  }
