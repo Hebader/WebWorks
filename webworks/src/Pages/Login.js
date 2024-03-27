@@ -28,7 +28,7 @@ const Login = () => {
       const response = await axios.post('http://localhost:3001/login', {
         name,
         password,
-        privateID
+        privateID,
       });
       setLoginStatus(response.data.message);
       if (response.status === 200) {
@@ -127,7 +127,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button className="login-button" type="submit">
+            <button className="login-form-button" type="submit">
               Login
             </button>
           </form>
